@@ -10,7 +10,6 @@
     "generate-handlers": "./bin/generate-handlers.js"
   },
   "scripts": {
-    "msw-openapi-helper": "node bin/msw-openapi-helper.js",
     "extract": "node bin/extract-openapi.js",
     "generate": "node bin/generate-handlers.js",
     "test": "echo \"Error: no test specified\" && exit 1"
