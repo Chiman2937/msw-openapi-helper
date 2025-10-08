@@ -1,4 +1,7 @@
 // src/generate/generator.js
+import { dirname, relative } from 'path';
+import { writeFileSync } from 'fs';
+
 export function generateHandlersFile(mockFiles, outputFile) {
   const imports = mockFiles.map((file) => {
     const relativePath = relative(dirname(outputFile), file.path)
