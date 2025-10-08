@@ -10,7 +10,12 @@ export function extractMockFunctionNames(filePath) {
   let match;
 
   while ((match = regex.exec(content)) !== null) {
-    matches.push(match[1]);
+    const functionName = match[1];
+
+    // "ResponseMock"은 제외
+    if (!functionName.includes('Response')) {
+      matches.push(functionName);
+    }
   }
 
   return matches;
