@@ -1,7 +1,10 @@
+#!/usr/bin/env node
+
 import { extractOpenAPI } from '../src/extract/index.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { existsSync } from 'fs';
+import { pathToFileURL } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

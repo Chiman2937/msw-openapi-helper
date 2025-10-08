@@ -1,9 +1,10 @@
-// bin/generate-handlers.js
+#!/usr/bin/env node
 
 import { generateHandlers } from '../src/generate/index.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { existsSync } from 'fs';
+import { pathToFileURL } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,7 +19,8 @@ async function main() {
   }
 
   try {
-    const config = (await import(configPath)).default;
+    const configUrl = pathToFileURL(configPath).href;
+    const config = (await import(configUrl)).default;
     await generateHandlers(config);
   } catch (error) {
     console.error('❌ Error:', error.message);

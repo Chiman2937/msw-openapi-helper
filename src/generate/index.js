@@ -47,7 +47,7 @@ function extractMockFunctionNames(filePath, includeMethods) {
   return matches;
 }
 
-export function generateHandlers(config) {
+export async function generateHandlers(config) {
   const { endpointsDir, outputFile, includeMethods } = config;
 
   console.log(`${colors.cyan}🔍 Scanning MSW files...${colors.reset}`);

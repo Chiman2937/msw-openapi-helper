@@ -3,6 +3,7 @@
 import { copyFileSync, mkdirSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { pathToFileURL } from 'url';
 import { extractOpenAPI } from '../src/extract/index.js';
 import { generateHandlers } from '../src/generate/index.js';
 
@@ -71,13 +72,15 @@ async function runAll() {
 
   try {
     // 1. Extract OpenAPI
-    const openapiConfig = (await import(openapiConfigPath)).default;
+    const openapiConfigUrl = pathToFileURL(openapiConfigPath).href;
+    const openapiConfig = (await import(openapiConfigUrl)).default;
     await extractOpenAPI(openapiConfig);
 
     console.log();
 
     // 2. Generate Handlers
-    const handlersConfig = (await import(handlersConfigPath)).default;
+    const handlersConfigUrl = pathToFileURL(handlersConfigPath).href;
+    const handlersConfig = (await import(handlersConfigUrl)).default;
     await generateHandlers(handlersConfig);
 
     console.log('🎉 All tasks completed successfully!\n');
