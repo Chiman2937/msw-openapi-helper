@@ -2,7 +2,7 @@ import { colors } from '../utils/colors.js';
 import { extractMockFunctionNames } from './parser.js';
 import { scanMswFiles } from './scanner.js';
 
-export function generateHandlers(config) {
+export async function generateHandlers(config) {
   const { endpointsDir, outputFile } = config;
 
   console.log(`${colors.cyan}🔍 Scanning MSW files...${colors.reset}`);

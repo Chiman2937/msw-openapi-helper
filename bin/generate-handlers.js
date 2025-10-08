@@ -20,10 +20,25 @@ async function main() {
 
   try {
     const configUrl = pathToFileURL(configPath).href;
-    const config = (await import(configUrl)).default;
+    const configModule = await import(configUrl);
+    const config = configModule.default;
+
+    if (!config) {
+      console.error('❌ Config file must export a default object');
+      console.error('   Example: export default { endpointsDir: "...", outputFile: "..." }');
+      process.exit(1);
+    }
+
+    if (!config.endpointsDir || !config.outputFile) {
+      console.error('❌ Config must include "endpointsDir" and "outputFile"');
+      console.error('   Current config:', config);
+      process.exit(1);
+    }
+
     await generateHandlers(config);
   } catch (error) {
     console.error('❌ Error:', error.message);
+    console.error(error.stack);
     process.exit(1);
   }
 }
