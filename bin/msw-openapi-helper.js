@@ -20,23 +20,29 @@ async function initConfigs() {
       target: 'handlers.config.js',
       name: 'Handlers config',
       type: 'config'
+    },
+    {
+      example: 'msw.config.example.js',
+      target: 'msw.config.js',
+      name: 'MSW config',
+      type: 'config'
     }
   ];
 
   const mswFiles = [
     {
       template: 'browser.ts',
-      target: 'src/mocks/browser.ts',
+      target: 'src/lib/msw/browser.ts',
       name: 'MSW browser setup'
     },
     {
       template: 'server.ts',
-      target: 'src/mocks/server.ts',
+      target: 'src/lib/msw/server.ts',
       name: 'MSW server setup'
     },
     {
       template: 'handlers.ts',
-      target: 'src/mocks/handlers.ts',
+      target: 'src/lib/msw/handlers.ts',
       name: 'MSW handlers'
     }
   ];
@@ -60,9 +66,9 @@ async function initConfigs() {
   }
 
   // Create MSW files
-  const mocksDir = join(process.cwd(), 'src', 'mocks');
-  if (!existsSync(mocksDir)) {
-    mkdirSync(mocksDir, { recursive: true });
+  const mswDir = join(process.cwd(), 'src', 'lib', 'msw');
+  if (!existsSync(mswDir)) {
+    mkdirSync(mswDir, { recursive: true });
   }
 
   for (const file of mswFiles) {
