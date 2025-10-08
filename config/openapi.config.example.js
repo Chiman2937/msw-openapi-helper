@@ -11,8 +11,8 @@ const config = {
   baseUrl: 'https://your-api.com',
 
   // Optional: Remove path prefix from all endpoints
-  // Example: '/{organizationId}' will transform '/org123/users' to '/users'
-  removePathPrefix: '/{organizationId}',
+  // Example: '/{teamId}' will transform '/16-1/users' to '/users'
+  removePathPrefix: '/{teamId}',
 
   // Output file path
   outputFile: 'openapi.json',
