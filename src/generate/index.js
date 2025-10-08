@@ -1,6 +1,7 @@
 import { colors } from '../utils/colors.js';
 import { extractMockFunctionNames } from './parser.js';
 import { scanMswFiles } from './scanner.js';
+import { generateHandlersFile } from './generater.js';
 
 export async function generateHandlers(config) {
   const { endpointsDir, outputFile } = config;
@@ -19,7 +20,7 @@ export async function generateHandlers(config) {
     }))
     .filter((file) => file.functionNames.length > 0);
 
-  const result = generateHandlers(mockFiles, outputFile);
+  const result = generateHandlersFile(mockFiles, outputFile);
 
   console.log(
     `\n${colors.green}✅ Successfully generated handlers.ts${colors.reset}`
