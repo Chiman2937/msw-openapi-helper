@@ -1,8 +1,9 @@
 import { colors } from '../utils/colors.js';
+import { extractMockFunctionNames } from './parser.js';
 import { scanMswFiles } from './scanner.js';
 
 export function generateHandlers(config) {
-  const { endpointsDir, outputFile } = config; // includeMethods 제거
+  const { endpointsDir, outputFile } = config;
 
   console.log(`${colors.cyan}🔍 Scanning MSW files...${colors.reset}`);
 
@@ -14,7 +15,7 @@ export function generateHandlers(config) {
   const mockFiles = mswFiles
     .map((file) => ({
       path: file,
-      functionNames: extractMockFunctionNames(file), // includeMethods 제거
+      functionNames: extractMockFunctionNames(file),
     }))
     .filter((file) => file.functionNames.length > 0);
 
