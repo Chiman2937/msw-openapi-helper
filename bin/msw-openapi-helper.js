@@ -12,18 +12,39 @@ async function initConfigs() {
     {
       example: 'openapi.config.example.js',
       target: 'openapi.config.js',
-      name: 'OpenAPI config'
+      name: 'OpenAPI config',
+      type: 'config'
     },
     {
       example: 'handlers.config.example.js',
       target: 'handlers.config.js',
-      name: 'Handlers config'
+      name: 'Handlers config',
+      type: 'config'
+    }
+  ];
+
+  const mswFiles = [
+    {
+      template: 'browser.ts',
+      target: 'src/mocks/browser.ts',
+      name: 'MSW browser setup'
+    },
+    {
+      template: 'server.ts',
+      target: 'src/mocks/server.ts',
+      name: 'MSW server setup'
+    },
+    {
+      template: 'handlers.ts',
+      target: 'src/mocks/handlers.ts',
+      name: 'MSW handlers'
     }
   ];
 
   let created = 0;
   let skipped = 0;
 
+  // Create config files
   for (const config of configs) {
     const examplePath = join(__dirname, '..', 'config', config.example);
     const targetPath = join(process.cwd(), config.target);
@@ -34,6 +55,26 @@ async function initConfigs() {
     } else {
       copyFileSync(examplePath, targetPath);
       console.log(`✅ Created ${config.target}`);
+      created++;
+    }
+  }
+
+  // Create MSW files
+  const mocksDir = join(process.cwd(), 'src', 'mocks');
+  if (!existsSync(mocksDir)) {
+    mkdirSync(mocksDir, { recursive: true });
+  }
+
+  for (const file of mswFiles) {
+    const templatePath = join(__dirname, '..', 'templates', file.template);
+    const targetPath = join(process.cwd(), file.target);
+
+    if (existsSync(targetPath)) {
+      console.log(`⏭️  ${file.name} already exists, skipping...`);
+      skipped++;
+    } else {
+      copyFileSync(templatePath, targetPath);
+      console.log(`✅ Created ${file.target}`);
       created++;
     }
   }
