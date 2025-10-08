@@ -3,15 +3,20 @@
   "version": "1.0.14",
   "description": "Extract OpenAPI specs and generate MSW handlers automatically",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
   "bin": {
     "msw-openapi-helper": "./bin/msw-openapi-helper.js",
     "extract-openapi": "./bin/extract-openapi.js",
     "generate-handlers": "./bin/generate-handlers.js"
   },
   "scripts": {
-    "extract": "node bin/extract-openapi.js",
-    "generate": "node bin/generate-handlers.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -24,11 +29,11 @@
     "testing",
     "handler-generator"
   ],
-  "author": "cy",
+  "author": "cydev",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cy/msw-openapi-helper"
+    "url": "https://github.com/Chiman2937/msw-openapi-helper"
   },
   "engines": {
     "node": ">=14.0.0"
