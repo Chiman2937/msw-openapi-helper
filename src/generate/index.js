@@ -1,4 +1,5 @@
 import { colors } from '../utils/colors.js';
+import { scanMswFiles } from './scanner.js';
 
 export function generateHandlers(config) {
   const { endpointsDir, outputFile } = config; // includeMethods 제거
