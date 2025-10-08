@@ -1,0 +1,48 @@
+{
+  "name": "@cydev/msw-openapi-helper",
+  "version": "1.0.3",
+  "description": "Extract OpenAPI specs and generate MSW handlers automatically",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "msw-openapi-helper": "./bin/msw-openapi-helper.js",
+    "extract-openapi": "./bin/extract-openapi.js",
+    "generate-handlers": "./bin/generate-handlers.js"
+  },
+  "scripts": {
+    "msw-openapi-helper": "node bin/msw-openapi-helper.js",
+    "extract": "node bin/extract-openapi.js",
+    "generate": "node bin/generate-handlers.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "msw",
+    "mock-service-worker",
+    "openapi",
+    "swagger",
+    "api",
+    "mock",
+    "testing",
+    "handler-generator"
+  ],
+  "author": "cy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cy/msw-openapi-helper"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "config/",
+    "templates/",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "msw": "^2.0.0"
+  }
+}
