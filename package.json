@@ -1,6 +1,6 @@
 {
   "name": "@cydev/msw-openapi-helper",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Extract OpenAPI specs and generate MSW handlers automatically",
   "main": "src/index.js",
   "types": "src/index.d.ts",
