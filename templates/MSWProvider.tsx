@@ -3,29 +3,21 @@
 
 import { useEffect } from 'react';
 
-/**
- * MSW Provider Component
- * Automatically initializes MSW based on msw.config.js
- */
-export function MSWProvider({ children }) {
+const config = {
+  enabledInDevelopment: true,
+  enabledInProduction: false,
+  handlersPath: 'src/mock/handlers',
+  serviceWorkerUrl: '/mockServiceWorker.js',
+  onUnhandledRequest: 'bypass' as const,
+};
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export function MSWProvider({ children }: Props) {
   useEffect(() => {
     async function initMSW() {
-      // MSW config 로드
-      let config;
-      try {
-        const configModule = await import(process.cwd() + '/msw.config.js');
-        config = configModule.default;
-      } catch {
-        // config 파일이 없으면 기본값
-        config = {
-          enabledInDevelopment: true,
-          enabledInProduction: false,
-          handlersPath: 'src/lib/msw/handlers',
-          serviceWorkerUrl: '/mockServiceWorker.js',
-          onUnhandledRequest: 'bypass',
-        };
-      }
-
       // MSW 활성화 여부 확인
       const isDev = process.env.NODE_ENV === 'development';
       const shouldEnable = isDev
@@ -47,7 +39,9 @@ export function MSWProvider({ children }) {
 
           console.log('🔷 MSW Client ready');
         } catch (error) {
-          console.warn('⚠️  MSW Client setup failed:', error.message);
+          const errorMessage =
+            error instanceof Error ? error.message : 'Unknown error';
+          console.warn('⚠️  MSW Client setup failed:', errorMessage);
         }
       }
     }
@@ -62,20 +56,6 @@ export function MSWProvider({ children }) {
 if (typeof window === 'undefined') {
   (async () => {
     try {
-      // MSW config 로드
-      let config;
-      try {
-        const configModule = await import(process.cwd() + '/msw.config.js');
-        config = configModule.default;
-      } catch {
-        config = {
-          enabledInDevelopment: true,
-          enabledInProduction: false,
-          handlersPath: 'src/lib/msw/handlers',
-          onUnhandledRequest: 'bypass',
-        };
-      }
-
       // MSW 활성화 여부 확인
       const isDev = process.env.NODE_ENV === 'development';
       const shouldEnable = isDev
@@ -93,7 +73,9 @@ if (typeof window === 'undefined') {
         console.log('🔶 MSW Server ready');
       }
     } catch (error) {
-      console.warn('⚠️  MSW Server setup failed:', error.message);
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      console.warn('⚠️  MSW Client setup failed:', errorMessage);
     }
   })();
 }

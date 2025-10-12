@@ -13,38 +13,37 @@ async function initConfigs() {
       example: 'openapi.config.example.js',
       target: 'openapi.config.js',
       name: 'OpenAPI config',
-      type: 'config'
+      type: 'config',
     },
     {
       example: 'handlers.config.example.js',
       target: 'handlers.config.js',
       name: 'Handlers config',
-      type: 'config'
+      type: 'config',
     },
-    {
-      example: 'msw.config.example.js',
-      target: 'msw.config.js',
-      name: 'MSW config',
-      type: 'config'
-    }
   ];
 
   const mswFiles = [
     {
       template: 'browser.ts',
-      target: 'src/lib/msw/browser.ts',
-      name: 'MSW browser setup'
+      target: 'src/mock/browser.ts',
+      name: 'MSW browser setup',
     },
     {
       template: 'server.ts',
-      target: 'src/lib/msw/server.ts',
-      name: 'MSW server setup'
+      target: 'src/mock/server.ts',
+      name: 'MSW server setup',
     },
     {
       template: 'handlers.ts',
-      target: 'src/lib/msw/handlers.ts',
-      name: 'MSW handlers'
-    }
+      target: 'src/mock/handlers.ts',
+      name: 'MSW handlers',
+    },
+    {
+      template: 'MSWProvider.tsx',
+      target: 'src/providers/MSWProvider.tsx',
+      name: 'MSW Provider',
+    },
   ];
 
   let created = 0;
@@ -66,7 +65,7 @@ async function initConfigs() {
   }
 
   // Create MSW files
-  const mswDir = join(process.cwd(), 'src', 'lib', 'msw');
+  const mswDir = join(process.cwd(), 'src', 'mock');
   if (!existsSync(mswDir)) {
     mkdirSync(mswDir, { recursive: true });
   }
